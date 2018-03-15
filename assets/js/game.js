@@ -6,7 +6,7 @@ $(document).ready(function() {
 	var countdownTimer = {
 		time : 30,
 		reset: function() {
-			this.time = 30;
+			this.time = 10;
 			$('.timer').html('<h3>' + this.time + ' seconds remaining</h3>');
 		},
 		start: function() {
@@ -24,7 +24,7 @@ $(document).ready(function() {
 			}
 			else {
 				index++;
-				wrong();
+				outOfTime();
 				countdownTimer.reset();
 				if (index < qArray.length) {
 					initQ(index);
@@ -137,6 +137,12 @@ function answer() {
     function wrong() {
         incorrect++;
         alert("Incorrect!");
+        console.log("incorrect");
+    }
+
+    function outOfTime() {
+        incorrect++;
+        alert(`You ran out of time! The correct answer was ${qArray[index-1].answer}`);
         console.log("incorrect");
     }
 
