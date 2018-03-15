@@ -53,6 +53,54 @@ const q5 = {
 };
 
 // load all of the questions into their own array
-const questionArray = [q1, q2, q3, q4, q5,];
+const qArray = [q1, q2, q3, q4, q5,];
 
+function setup() {
+	index = 0;
+	$('.question').append('<button id="startButton">Start</button>');
+	$('#startButton').on('click', function() {
+		$(this).hide();
+		countdownTimer.start();
+	 	loadQuestion(index);
+	});
+}		
 
+//loads and displays the question and answers
+function loadQuestion(q) {
+	console.log(q);
+	countdownTimer.reset();
+  $(".question").html("<h3>" + qArray[q].question + "</h3>");
+  $("#b1").text(qArray[q].possibleAnswers[0]).show();
+  $("#b2").text(qArray[q].possibleAnswers[1]).show();
+  $("#b3").text(qArray[q].possibleAnswers[2]).show();
+  $("#b4").text(qArray[q].possibleAnswers[3]).show();
+//  answer();  
+//  nextQuestion(index);
+}
+
+function answer() {
+    //  nextQuestion();
+        $('.answerchoice').on('click', function() {
+          console.log('alert', index);
+            index++;
+            console.log('click', index);
+            $(".question").text('');
+            $("#buttonA").text('');
+            $("#buttonB").text('');
+            $("#buttonC").text('');
+            $("#buttonD").text('');
+            loadQuestion();
+        })
+    }
+
+    function right() {
+        correct++;
+        alert("Correct!");
+        console.log("correct");
+    }
+
+    function wrong() {
+        incorrect++;
+        alert("Incorrect!");
+        console.log("incorrect");
+    }
