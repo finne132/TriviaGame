@@ -6,3 +6,9 @@ p{
     color:white;
     font-size:25pt;
 }
+
+.vcenter {
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
+}

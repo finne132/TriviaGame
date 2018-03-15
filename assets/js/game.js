@@ -1,7 +1,8 @@
 "use strict";
 
 $(document).ready(function() {
-	var index = 0;
+    var index = 0;
+    let counter =0;
 	var countdownTimer = {
 		time : 30,
 		reset: function() {
@@ -9,7 +10,7 @@ $(document).ready(function() {
 			$('.timer').html('<h3>' + this.time + ' seconds remaining</h3>');
 		},
 		start: function() {
-			counter = setInterval(countdownTimer.count, 1000);	
+			 counter = setInterval(countdownTimer.count, 1000);	
 		},
 		stop: function() {
 			clearInterval(counter);
@@ -26,7 +27,7 @@ $(document).ready(function() {
 				wrong();
 				countdownTimer.reset();
 				if (index < qArray.length) {
-					loadQuestion(index);
+					initQ(index);
 				} else {
 					$(".answerchoice").hide();
 					score();
@@ -92,39 +93,38 @@ const qArray = [q1, q2, q3, q4, q5,];
 
 function setup() {
 	index = 0;
-	$('.question').append('<button id="startButton">Start</button>');
+    $('.question').append('<button id="startButton" style="margin-top:20px;">Start</button>');
+    $('#buttonholder').hide();
 	$('#startButton').on('click', function() {
 		$(this).hide();
 		countdownTimer.start();
-	 	loadQuestion(index);
+         initQ(index);
+         $('#buttonholder').show();
 	});
 }		
 
 //loads and displays the question and answers
-function loadQuestion(q) {
+function initQ(q) {
 	console.log(q);
 	countdownTimer.reset();
-  $(".question").html("<h3>" + qArray[q].question + "</h3>");
+  $(".question").html("<div>" + qArray[q].question + "<div>");
   $("#b1").text(qArray[q].possibleAnswers[0]).show();
   $("#b2").text(qArray[q].possibleAnswers[1]).show();
   $("#b3").text(qArray[q].possibleAnswers[2]).show();
   $("#b4").text(qArray[q].possibleAnswers[3]).show();
-//  answer();  
-//  nextQuestion(index);
 }
 
 function answer() {
-    //  nextQuestion();
         $('.answerchoice').on('click', function() {
           console.log('alert', index);
             index++;
             console.log('click', index);
             $(".question").text('');
-            $("#buttonA").text('');
-            $("#buttonB").text('');
-            $("#buttonC").text('');
-            $("#buttonD").text('');
-            loadQuestion();
+            $("#b1").text('');
+            $("#b2").text('');
+            $("#b3").text('');
+            $("#b4").text('');
+            initQ();
         })
     }
 
@@ -143,9 +143,20 @@ function answer() {
     function score() {
         $('.score').empty();
         $('.score').append("<h2><p>" + correct + " correct</p></h2>");
-        $('.score').append("<h2><p>" + wrong + " incorrect</p></h2>");
+        $('.score').append("<h2><p>" + incorrect + " incorrect</p></h2>");
         countdownTimer.stop();
         $('.timer').empty();
+	    $('.question').append('<button id="startButton">Start</button>');
+	    $('#startButton').on('click', function() {
+        index = 0;
+		$(this).hide();
+		countdownTimer.start();
+        initQ(index);
+        incorrect=0;
+        correct=0;
+        $('.score').empty();
+	});	
+
     }
 
     setup();
@@ -189,7 +200,7 @@ function answer() {
         $("#b4").text('');
         index++;
         if (index < qArray.length) {
-            loadQuestion(index);
+            initQ(index);
         } else {
             $(".answerchoice").hide();
             score();
