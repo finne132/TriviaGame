@@ -39,7 +39,7 @@ $(document).ready(function() {
 let correct = 0;
 let incorrect = 0;
 const q1 = {
-	question : 'What was used to create tendons of the aliens jaws?',
+	question : 'What was used to create the tendons of the aliens jaws?',
 	possibleAnswers : ['A. Silk Fabric',
 				 'B. Plastic Shopping Bags',
 				 'C. Shredded Condoms',
