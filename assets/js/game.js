@@ -104,3 +104,11 @@ function answer() {
         alert("Incorrect!");
         console.log("incorrect");
     }
+
+    function score() {
+        $('.score').empty();
+        $('.score').append("<h2><p>" + correct + " correct</p></h2>");
+        $('.score').append("<h2><p>" + wrong + " incorrect</p></h2>");
+        countdownTimer.stop();
+        $('.timer').empty();
+    }
