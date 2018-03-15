@@ -1,5 +1,40 @@
 "use strict";
 
+$(document).ready(function() {
+	var index = 0;
+	var countdownTimer = {
+		time : 30,
+		reset: function() {
+			this.time = 30;
+			$('.timer').html('<h3>' + this.time + ' seconds remaining</h3>');
+		},
+		start: function() {
+			counter = setInterval(countdownTimer.count, 1000);	
+		},
+		stop: function() {
+			clearInterval(counter);
+		},
+		count: function() {
+				countdownTimer.time--;
+				console.log(countdownTimer.time);
+//				$('.timer').html(countdownTimer.time);
+			if (countdownTimer.time >= 0) {
+				$('.timer').html('<h3>' + countdownTimer.time + ' seconds remaining</h3>');
+			}
+			else {
+				index++;
+				wrong();
+				countdownTimer.reset();
+				if (index < qArray.length) {
+					loadQuestion(index);
+				} else {
+					$(".answerchoice").hide();
+					score();
+				}
+			}
+		}
+	};
+
 let correct = 0;
 let incorrect = 0;
 const q1 = {
@@ -112,3 +147,55 @@ function answer() {
         countdownTimer.stop();
         $('.timer').empty();
     }
+
+    setup();
+
+    $('.answerchoice').on('click', function() {
+        console.log($(this));
+        if(this.id == 'b1') {
+            var answerChosen = 'A';
+        } else if(this.id == 'b2') {
+            answerChosen = 'B';
+        } else if (this.id == 'b3') {
+            answerChosen = 'C';
+        } else if (this.id == 'b4') {
+            answerChosen = 'D';
+        } 
+        if ((answerChosen == 'A') && (qArray[index].flags[0] == true)) {
+            right();
+        } else if (answerChosen == 'A') {
+            wrong();
+        }
+        if ((answerChosen == 'B') && (qArray[index].flags[1] == true)) {
+            right();
+        } else if (answerChosen == 'B') {
+            wrong();
+        }
+       if ((answerChosen == 'C') && (qArray[index].flags[2] == true)) {
+            right();
+        } else if (answerChosen == 'C') {
+            wrong();
+        }
+       if ((answerChosen == 'D') && (qArray[index].flags[3] == true)) {
+            right();
+        } else if (answerChosen == 'D') {
+            wrong();
+        }
+       
+        $(".question").text('');
+        $("#b1").text('');
+        $("#b2").text('');
+        $("#b3").text('');
+        $("#b4").text('');
+        index++;
+        if (index < qArray.length) {
+            loadQuestion(index);
+        } else {
+            $(".answerchoice").hide();
+            score();
+        }
+       });
+       
+       
+       //	$('#start').click(countdownTimer.start);
+       });
