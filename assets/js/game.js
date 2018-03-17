@@ -168,7 +168,6 @@ function answer() {
     setup();
 
     $('.answerchoice').on('click', function() {
-        console.log($(this));
         if(this.id == 'b1') {
             var answerChosen = 'A';
         } else if(this.id == 'b2') {
@@ -188,12 +187,12 @@ function answer() {
         } else if (answerChosen == 'B') {
             wrong();
         }
-       if ((answerChosen == 'C') && (qArray[index].flags[2] == true)) {
+        if ((answerChosen == 'C') && (qArray[index].flags[2] == true)) {
             right();
         } else if (answerChosen == 'C') {
             wrong();
         }
-       if ((answerChosen == 'D') && (qArray[index].flags[3] == true)) {
+        if ((answerChosen == 'D') && (qArray[index].flags[3] == true)) {
             right();
         } else if (answerChosen == 'D') {
             wrong();
