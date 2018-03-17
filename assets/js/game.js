@@ -210,9 +210,6 @@ function answer() {
         } else {
             $(".answerchoice").hide();
             score();
-        }
-       });
-       
-       
-       //	$('#start').click(countdownTimer.start);
+            }
+        });
        });
